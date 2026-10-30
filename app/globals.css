@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Warm stone, bone text. Emerald is you and every action you take, amber is the
+   other side of the table. Green and red are kept for the debrief so they only
+   ever mean "worked" and "cost you". */
+:root {
+  --background: 28 25 23;
+  --surface: 41 37 36;
+  --raised: 54 49 47;
+  --line: 68 64 60;
+  --text: 245 240 232;
+  --muted: 168 162 158;
+  --faint: 120 113 108;
+  --primary: 5 150 105;
+  --them: 217 160 82;
+  --strength: 22 163 74;
+  --weakness: 220 38 38;
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: rgb(var(--background));
+  color: rgb(var(--text));
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgb(var(--primary) / 0.35);
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line/70 bg-surface/60 shadow-card;
+  }
+
+  .label {
+    @apply font-mono text-[11px] uppercase tracking-[0.16em] text-faint;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-background/60 px-3.5 py-2.5 text-sm text-text placeholder:text-faint outline-none transition focus:border-primary/70 focus:ring-4 focus:ring-primary/15;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition disabled:cursor-not-allowed disabled:opacity-50 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/30;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary/90 active:bg-primary/80;
+  }
+
+  .btn-bone {
+    @apply btn bg-text text-background hover:bg-text/90;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-surface/40 text-text hover:bg-surface;
+  }
+
+  .btn-danger {
+    @apply btn border border-weakness/40 bg-weakness/10 text-weakness hover:bg-weakness/20;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-md border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider;
+  }
+
+  .skeleton {
+    background: linear-gradient(90deg, rgb(var(--surface)) 0px, rgb(var(--raised)) 120px, rgb(var(--surface)) 240px);
+    background-size: 800px 100%;
+    @apply animate-shimmer rounded-md;
+  }
+}
+
+/* A faint table edge running across the hero and auth panels. */
+.table-grain {
+  background-image: radial-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}
